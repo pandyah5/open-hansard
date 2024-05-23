@@ -10,6 +10,10 @@ from xml.etree import ElementTree as ET
 # Import conversation.py
 from conversation import Speaker, Dialogue, Collection
 
+# For DEBUG
+import warnings
+DEBUG = 0
+
 API_URL = 'https://www.ourcommons.ca/Content/House/441/Debates/314/HAN314-E.XML'
 def call_api(url):
     response = requests.get(url)
@@ -34,57 +38,77 @@ def generate_dialogue_summary(xml_content):
     for subject_of_business in root.iter('SubjectOfBusiness'):
         for content in subject_of_business.iter('SubjectOfBusinessContent'):
             for intervention in content.iter('Intervention'):
-                print("\n\n### New Intervention ###")
+                # print("\n\n### New Intervention ###")
                 collection = Collection('')
                 source = Speaker('', '')
                 for speaker in intervention.iter('PersonSpeaking'):
                     flag = 0
-                    # print("### Speaker ###")
+                    
+                    if DEBUG:
+                        print("### Speaker ###")
+                    
                     for Affiliation in speaker.iter('Affiliation'):
                         if flag == 1:
                             assert False, "Multiple Speakers found"
                         flag = 1
                         
                         source.set_name(Affiliation.text)
-                        # print (Affiliation.text)
+                        if DEBUG:
+                            print (Affiliation.text)
 
                 dialogue = Dialogue(source, '', '')
                 for content in intervention.iter('Content'):
                     text = ""
                     for paratext in content.iter('ParaText'):
                         text += paratext.text
-                    # print("### Dialogue ###")
-                    # print(text)
+
+                    if DEBUG:
+                        print("### Dialogue ###")
+                        print(text)
+                    
                     dialogue.set_conversation(text)
 
                 # Add to the list of collections
                 collection.add_dialogue(dialogue)
                 list_of_collections.append(collection)
-
-            # Get summary for the intervention
-
-            # response = ollama.chat(model='llama3', messages=[
-            #     {
-            #         'role': 'user',
-            #         'content': f'Can you please summarize the text and pick out the important parts: {dialogue.get_conversation()}',
-            #     },
-            # ])
-
-            # Update word_counter
-            # word_counter += len(source.get_name().split()) + len(dialogue.get_conversation().split())
             
     return list_of_collections
     
 
 collections = generate_dialogue_summary(text_data)
 
+batch = []
+batch_text = ""
 word_count = 0
 for collection in collections:
-    # print(intervention.title)
     for dialogue in collection.dialogues:
-        # print(dialogue.speaker.get_name())
-        # print(dialogue.conversation)
-        # print(dialogue.conversation_summary)
+        batch_text += f"{dialogue.speaker.get_name()} said: {dialogue.conversation} \n"
         word_count += len(dialogue.speaker.get_name().split()) + len(dialogue.conversation.split())
+        if word_count > 2500:
+            batch.append(batch_text)
+            batch_text = ""
+            word_count = 0
 
-print(word_count)
+if DEBUG:
+    print(word_count)
+    print(len(batch))
+
+batch_summary = []
+summary_size = 3000 / len(batch)
+
+for text in batch:
+    # Get the summary for each batch
+    warnings.warn(f"Processing batch...{len(batch_summary) + 1}")
+    response = ollama.chat(model='llama3', messages=[
+                {
+                    'role': 'user',
+                    'content': f'Can you please summarize this text in less than {summary_size} words. Please pick out only the most important parts: {text}',
+                },
+            ])
+    print(text)
+    print("\n")
+    print(f"Summary ({len(response['message']['content'])} words):\n{response['message']['content']}")
+    batch_summary.append(response['message']['content'])
+    print("##############################################")
+
+assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
