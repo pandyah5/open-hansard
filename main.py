@@ -14,7 +14,11 @@ from conversation import Speaker, Dialogue, Collection
 import warnings
 DEBUG = 0
 
-API_URL = 'https://www.ourcommons.ca/Content/House/441/Debates/314/HAN314-E.XML'
+# Constants
+PARLIAMENT_SESSION_NUMBER = 441 # 44th parliament and session 1
+DEBATE_NUMBER = 315
+
+API_URL = f'https://www.ourcommons.ca/Content/House/{PARLIAMENT_SESSION_NUMBER}/Debates/{DEBATE_NUMBER}/HAN{DEBATE_NUMBER}-E.XML'
 def call_api(url):
     response = requests.get(url)
     if response.status_code == 200:
@@ -38,7 +42,8 @@ def generate_dialogue_summary(xml_content):
     for subject_of_business in root.iter('SubjectOfBusiness'):
         for content in subject_of_business.iter('SubjectOfBusinessContent'):
             for intervention in content.iter('Intervention'):
-                # print("\n\n### New Intervention ###")
+                if DEBUG:
+                    print("\n\n### New Intervention ###")
                 collection = Collection('')
                 source = Speaker('', '')
                 for speaker in intervention.iter('PersonSpeaking'):
@@ -105,11 +110,14 @@ for text in batch:
                     'content': f'Can you please summarize this text in less than {summary_size} words. Please pick out only the most important parts: {text}',
                 },
             ])
-    print(text)
-    print("\n")
-    print(f"Summary ({len(response['message']['content'])} words):\n{response['message']['content']}")
+
+    if DEBUG:
+        print(text)
+        print("\n")
+        print(f"Summary ({len(response['message']['content'])} words):\n{response['message']['content']}")
+        print("##############################################")
+
     batch_summary.append(response['message']['content'])
-    print("##############################################")
 
 assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
 
@@ -124,3 +132,8 @@ response = ollama.chat(model='llama3', messages=[
 
 print("\n\n")
 print(response['message']['content'])
+
+# Write summary to the file
+f = open(f"summary/hansard-{PARLIAMENT_SESSION_NUMBER}-{DEBATE_NUMBER}.txt", "w")
+f.write(response['message']['content'])
+f.close()
