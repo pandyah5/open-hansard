@@ -25,8 +25,6 @@ def get_parliament_and_session_id():
 
             session_num = sessionNumRegex.search(subtitle.text).group(1)
             parliament_num = parliamentNumRegex.search(subtitle.text).group(1)
-            print ("Session number: ", session_num)
-            print ("Parliament number: ", parliament_num)
 
             return parliament_num, session_num
     else:
@@ -39,17 +37,29 @@ def match_last_retrieved_data(parliament_num, session_num):
         last_retrieved_data = file.read().split('-')
         file.close()
 
-    print(last_retrieved_data)
+    print("Last retrieved data: ", last_retrieved_data)
 
     # Check if the last retrieved data matches the current data
     if last_retrieved_data[0] == parliament_num and last_retrieved_data[1] == session_num:
         print("Parliament and Session number have not changed since the last retrieval")
         
-        # Update the debate number
-        last_retrieved_data[2] = str(int(last_retrieved_data[2]) + 1)
-        with open("last-retrieved.txt", "w") as file:
-            file.write('-'.join(last_retrieved_data))
-            file.close()
+        # Check if the next debate number is available
+        last_debate_number = int(last_retrieved_data[2])
+        API_URL = f'https://www.ourcommons.ca/Content/House/{parliament_num}{session_num}/Debates/{last_debate_number + 1}/HAN{last_debate_number + 1}-E.XML'
+        response = requests.get(API_URL)
+        if response.status_code == 200:
+            # New debate number is available
+            print("New debate number is available.")
+
+            # Update the debate number
+            last_retrieved_data[2] = str(last_debate_number + 1)
+            with open("last-retrieved.txt", "w") as file:
+                file.write('-'.join(last_retrieved_data))
+                file.close()
+
+        else:
+            # No new debate number is available
+            print("No new debate available")
 
     elif last_retrieved_data[0] == parliament_num and last_retrieved_data[1] != session_num:
         print("Session number has been updated since the last retrieval")
@@ -73,6 +83,8 @@ def match_last_retrieved_data(parliament_num, session_num):
         with open("last-retrieved.txt", "w") as file:
             file.write('-'.join(last_retrieved_data))
             file.close()
+
+    print("Updated data: ", last_retrieved_data)
 
 p_num, s_num = get_parliament_and_session_id()
 match_last_retrieved_data(p_num, s_num)
