@@ -9,25 +9,39 @@ from xml.etree import ElementTree as ET
 
 # Import conversation.py
 from conversation import Speaker, Dialogue, Collection
+from availability import get_parliament_and_session_id, get_new_debate
 
 # For DEBUG
 import warnings
 DEBUG = 0
 
-# Constants
-PARLIAMENT_SESSION_NUMBER = 441 # 44th parliament and session 1
-DEBATE_NUMBER = 315
+# Get the parliament and session number using get_parliament_and_session_id
+parliament_num, session_num = get_parliament_and_session_id()
+if get_new_debate(parliament_num, session_num) == False:
+    print(">>> INFO: No new debate available")
+    exit()
+else:
+    with open("last-retrieved.txt", "r") as file:
+        debate = file.read()
+        print(">>> INFO: New debate available:", debate)
+        file.close()
 
-API_URL = f'https://www.ourcommons.ca/Content/House/{PARLIAMENT_SESSION_NUMBER}/Debates/{DEBATE_NUMBER}/HAN{DEBATE_NUMBER}-E.XML'
-def call_api(url):
+def call_api():
+    # Get the new debate URL
+    url = ""
+    with open("new-debate.txt", "r") as file:
+        url = file.read()
+        file.close()
+    
     response = requests.get(url)
     if response.status_code == 200:
         text_data = response.text
         return text_data
     else:
-        print("Failed to call the API.")
+        print(">>> FATAL: Failed to call the API.", url, response.status_code)
+        exit()
 
-text_data = call_api(API_URL)
+text_data = call_api()
 
 # Filter the first line of XML content
 xml_declaration = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -107,7 +121,7 @@ for text in batch:
     response = ollama.chat(model='llama3', messages=[
                 {
                     'role': 'user',
-                    'content': f'Can you please summarize this text in less than {summary_size} words. Please pick out only the most important parts: {text}',
+                    'content': f'Summarize this text in less than {summary_size} words. Please pick out only the most important parts: {text}',
                 },
             ])
 
@@ -126,7 +140,7 @@ total_summary = "".join(batch_summary)
 response = ollama.chat(model='llama3', messages=[
             {
                 'role': 'user',
-                'content': f'Can you please summarize the text below in a coherent manner: {total_summary}',
+                'content': f'Can you please summarize the text below into a coherent article: {total_summary}',
             },
         ])
 
