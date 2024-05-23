@@ -112,3 +112,15 @@ for text in batch:
     print("##############################################")
 
 assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
+
+# Summarize all the batch summaries
+total_summary = "".join(batch_summary)
+response = ollama.chat(model='llama3', messages=[
+            {
+                'role': 'user',
+                'content': f'Can you please summarize the text below in a coherent manner: {total_summary}',
+            },
+        ])
+
+print("\n\n")
+print(response['message']['content'])
