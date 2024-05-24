@@ -20,10 +20,12 @@ parliament_num, session_num = get_parliament_and_session_id()
 if get_new_debate(parliament_num, session_num) == False:
     print(">>> INFO: No new debate available")
     exit()
-else:
-    with open("last-retrieved.txt", "r") as file:
-        debate = file.read()
-        print(">>> INFO: New debate available:", debate)
+
+debate_num = ""
+with open("last-retrieved.txt", "r") as file:
+        print(">>> INFO: New debate available:", debate_num)
+        last_retrieved_data = file.read().split('-')
+        debate_num = last_retrieved_data[2]
         file.close()
 
 def call_api():
@@ -121,7 +123,7 @@ for text in batch:
     response = ollama.chat(model='llama3', messages=[
                 {
                     'role': 'user',
-                    'content': f'Summarize this text in less than {summary_size} words. Please pick out only the most important parts: {text}',
+                    'content': f'Summarize this in less than {summary_size} words. Pick out only the most important points and mention the different views of parties on the discussion: {text}',
                 },
             ])
 
@@ -148,6 +150,6 @@ print("\n\n")
 print(response['message']['content'])
 
 # Write summary to the file
-f = open(f"summary/hansard-{PARLIAMENT_SESSION_NUMBER}-{DEBATE_NUMBER}.txt", "w")
+f = open(f"summary/hansard-{parliament_num}{session_num}-{debate_num}.txt", "w")
 f.write(response['message']['content'])
 f.close()
