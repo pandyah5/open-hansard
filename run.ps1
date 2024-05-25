@@ -12,7 +12,6 @@ Get-Content "auto-hansard\summary\Debate-$today.md" | Add-Content "content\summa
 (Get-Content "content\summary\Debate-$today.md") -replace "draft = true", "draft = false" | Set-Content "content\summary\Debate-$today.md"
 
 # Run a git command to add, commit and push the changes
-# git add auto-hansard\summary\*
-# git add open-hansard-website\content\summary\*
-# git commit -m "Update content"
-# git push
+git add .
+git commit -m "Update content - $today"
+git push

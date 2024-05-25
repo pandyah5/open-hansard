@@ -123,7 +123,7 @@ for text in batch:
     response = ollama.chat(model='llama3', messages=[
                 {
                     'role': 'user',
-                    'content': f'Summarize this in less than {summary_size} words. Pick out only the most important points and mention the different views of parties on the discussion: {text}',
+                    'content': f'Summarize this in less than {summary_size} words. Pick out only the most important points and mention the different views of parties in the discussion: {text}',
                 },
             ])
 
@@ -134,16 +134,15 @@ for text in batch:
         print("##############################################")
 
     batch_summary.append(response['message']['content'])
-    break
 
-# assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
+assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
 
 # Summarize all the batch summaries
 total_summary = "".join(batch_summary)
 response = ollama.chat(model='llama3', messages=[
             {
                 'role': 'user',
-                'content': f'Can you please summarize the text below into a coherent article. Use the markdown format: {total_summary}',
+                'content': f'Summarize the text below into a coherent article starting with the line "Today the parliament talked about". Use the markdown format: {total_summary}',
             },
         ])
 
