@@ -2,4 +2,5 @@ baseURL = 'https://open-hansard-website.github.io/'
 languageCode = 'en-us'
 relativeURLs = true
 title = 'Open Hansard'
-theme = 'papermod'
+theme = 'mini'
+params.assets.disableFingerprinting = true
