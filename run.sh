@@ -14,7 +14,7 @@ cat auto-hansard/summary/Debate-$today.md > open-hansard-website/content/summary
 sed -i 's/draft: true/draft: false/g' content/summary/Debate-$today.md
 
 # Run a git command to add, commit and push the changes
-# git add auto-hansard/summary/*
-# git add open-hansard-website/content/summary/*
-# git commit -m "Update content"
-# git push
+git add auto-hansard/summary/*
+git add open-hansard-website/content/summary/*
+git commit -m "Update content"
+git push

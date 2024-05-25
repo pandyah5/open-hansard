@@ -134,15 +134,16 @@ for text in batch:
         print("##############################################")
 
     batch_summary.append(response['message']['content'])
+    break
 
-assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
+# assert len(batch_summary) == len(batch), "Batch and batch_summary length mismatch"
 
 # Summarize all the batch summaries
 total_summary = "".join(batch_summary)
 response = ollama.chat(model='llama3', messages=[
             {
                 'role': 'user',
-                'content': f'Can you please summarize the text below into a coherent article: {total_summary}',
+                'content': f'Can you please summarize the text below into a coherent article. Use the markdown format: {total_summary}',
             },
         ])
 
@@ -150,6 +151,10 @@ print("\n\n")
 print(response['message']['content'])
 
 # Write summary to the file
-f = open(f"summary/hansard-{parliament_num}{session_num}-{debate_num}.txt", "w")
+# Get todays date
+import datetime
+today = datetime.date.today()
+
+f = open(f"summary/debate-{today}.md", "w")
 f.write(response['message']['content'])
 f.close()

@@ -3,6 +3,12 @@ import math
 import requests
 from bs4 import BeautifulSoup
 
+# Set the directory to current directory
+import os
+os.chdir(os.path.dirname(__file__))
+print("Current directory: ", os.getcwd())
+
+
 def get_parliament_and_session_id():
     # URL of the webpage to scrape
     url = "https://www.ourcommons.ca/en/parliamentary-business/"
