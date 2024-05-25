@@ -1,13 +1,16 @@
 # For calling the API
 import requests
 
+# For annotating the summaries with dates
+import datetime
+
 # For calling the llama3 model
 import ollama
 
 # Read the XML content and parse it
 from xml.etree import ElementTree as ET
 
-# Import conversation.py
+# Import helper functions
 from conversation import Speaker, Dialogue, Collection
 from availability import get_parliament_and_session_id, get_new_debate
 
@@ -150,10 +153,9 @@ print("\n\n")
 print(response['message']['content'])
 
 # Write summary to the file
-# Get todays date
-import datetime
-today = datetime.date.today()
+# Get yesterday's date
+yesterday = datetime.date.today() - datetime.timedelta(days = 1)
 
-f = open(f"summary/debate-{today}.md", "w")
+f = open(f"summary/debate-{yesterday}.md", "w")
 f.write(response['message']['content'])
 f.close()
