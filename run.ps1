@@ -6,7 +6,7 @@ $yesterday = (Get-Date).AddDays(-1).ToString("yyyy-MM-dd")
 hugo new "summary\Debate-$yesterday.md"
 
 # Add contents of the new file to Debate-$today.md
-Get-Content "auto-hansard\summary\Debate-$yesterday.md" | Add-Content "content\summary\Debate-$yesterday.md"
+Get-Content "auto-hansard\summary\Debate-$yesterday.md" | Add-Content "content\posts\Debate-$yesterday.md"
 
 # Set the draft to false
 (Get-Content "content\summary\Debate-$yesterday.md") -replace "draft = true", "draft = false" | Set-Content "content\summary\Debate-$yesterday.md"
