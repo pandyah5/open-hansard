@@ -15,4 +15,5 @@ It's important to note that Large Language Models can sometimes produce inaccura
 With Open Hansard, Hetav aspires to contribute to a deeper understanding of the complexities of parliamentary democracy, enriching our comprehension of this critical institution. By employing cutting-edge technologies and methodologies, he endeavors to bring new perspectives to the study of parliamentary debates, fostering informed discourse and facilitating evidence-based decision-making in the realm of Canadian politics.
 
 Source code: https://github.com/pandyah5/open-hansard
+
 Source code for website: https://github.com/pandyah5/open-hansard-website.github.io
