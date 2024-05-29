@@ -7,3 +7,6 @@ To achieve this, I will be utilizing the official Hansard document of Canada, wh
 Through this project, I aim to contribute to a better understanding of the dynamics at play in Canadian parliamentary politics, shedding light on the themes that unite or divide MPs, and providing a valuable resource for researchers, policymakers, and citizens alike. By leveraging LLMs, I hope to bring new perspectives and methods to the study of parliamentary debates, ultimately enhancing our comprehension of this critical institution.
 
 Website: https://pandyah5.github.io/open-hansard-website.github.io/
+
+![image](https://github.com/pandyah5/open-hansard/assets/60848863/b67e2eda-0fdd-456a-91fc-69771527cc8e)
+
