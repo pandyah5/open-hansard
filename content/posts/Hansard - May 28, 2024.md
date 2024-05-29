@@ -1,4 +1,8 @@
-Here is a coherent article starting with the line "Today the parliament talked about":
++++
+title = 'Hansard Summary for May 28, 2024'
+date = 2024-05-29T13:58:30-07:00
+draft = false
++++
 
 Today the parliament talked about whether a mistake by the Liberal Party should be allowed to thwart the will of the House. MPs argued that apologies are not enough to fix the problem and restore confidence in the institution. The Speaker's impartiality was questioned, and some MPs expressed concern about the impact on the institution's credibility.
 
