@@ -19,14 +19,14 @@ Get-Content "auto-hansard\summary\Debate-$yesterday.md" | Add-Content "content\p
 (Get-Content "content\posts\Hansard Summary for $month $day, $year.md") -replace "draft = true", "draft = false" | Set-Content "content\posts\Hansard Summary for $month $day, $year.md"
 
 # Run git to publish website
-# cd public
-# git add .
-# git commit -m "Update website content - $yesterday"
-# git push
+cd public
+git add .
+git commit -m "Update website content - $yesterday"
+git push
 
-# cd ..
+cd ..
 
-# # Run a git command to add, commit and push the changes
-# git add .
-# git commit -m "Update content - $yesterday"
-# git push
+# Run a git command to add, commit and push the changes
+git add .
+git commit -m "Update content - $yesterday"
+git push
