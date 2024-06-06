@@ -1,20 +1,20 @@
 +++
 title = 'Hansard Summary for June 05, 2024'
-date = 2024-06-06T15:41:22-07:00
+date = 2024-06-06T16:20:18-07:00
 draft = false
 +++
-**Parliament Debates National Pharmacare Program**
+Title: Parliament Discusses Election Reform and Care Program
 
-Today, parliamentarians discussed a national pharmacare program aimed at improving health equity and affordability for Canadians. The opposition claims that the government is trying to mislead Canadians by presenting false information about the benefits of their proposal.
+The Quebec parliament recently discussed two important topics: receiving care since May 1st and election reform. About 60% of dental care providers in Quebec have signed up for a new program that provides care to patients.
 
-The speaker in support of Bill C-59 emphasized the need for increased transparency and access to information for parliamentarians. They shared their personal experience with digital surveillance by Chinese intelligence officers (APT31) and argued that parliamentarians need access to sensitive security information to do their jobs effectively. The bill aims to ensure parliamentarians can access sensitive information requested by Parliament without government interference.
+However, the Conservative leader announced that the program does not exist, which was met with criticism from the government. The government also made historic investments in the Official Languages Act and the action plan, doubling investments and continuing to support French language and minority languages in Quebec and Canada.
 
-The government plans to create a national pharmacare program, which would provide universal single-payer coverage for certain medications, including contraceptives and diabetes medications. This would help Canadians access necessary medication without breaking the bank, saving them thousands of dollars per year.
+Meanwhile, the New Democratic Party (NDP) criticized the Liberal government's handling of the overdose crisis in British Columbia, citing rising deaths and misinformation spread by Conservatives. The NDP also criticized the government's handling of corporate taxes, citing a recent Parliamentary Budget Officer report that oil and gas corporations pay among the lowest federal tax rates in Canada.
 
-Conservatives are criticized for being insensitive to their own constituents' needs, particularly those with diabetes who would benefit from pharmacare. The Liberal Parliamentary Secretary suggested that if Conservatives can flip-flop on this issue, it might be beneficial. The discussion highlights the importance of pharmacare for Canadians and the potential benefits for millions of women who would benefit from contraceptive coverage.
+In addition to these issues, parliament also discussed a bill aimed at improving election reform. The bill proposes adding two more days to the advance polling period, which some argue is unnecessary and creates more chaos than benefits. However, others see it as a step in the right direction towards making Canadian elections fairer and more accessible for all citizens.
 
-A family physician discussed pharmacare and their experience working with people battling addictions. They emphasized the importance of universal pharmacare to ensure all Canadians have access to prescription drugs.
+The author of this speech argues that people already have the option to vote at any time at the returning officer's office, so the last day of advance polling not falling on a religious holiday (in this case, Diwali) is not a major issue. The real concern is the potential for municipal elections in 1,108 municipalities across Quebec to be held simultaneously with federal elections, creating a logistical nightmare.
 
-The Canadian drug agency has established an advisory committee to develop a strategy, which will coordinate existing efforts and promote the judicious use of healthcare resources. The government has been criticized for not consulting with experts or impacted groups, such as those with rare diseases.
+The author also criticizes the Liberal government for trying to help their own members by manipulating the Canada Elections Act, specifically by adding a provision that allows them to keep their pensions even if they lose their seats in parliament. This, the author argues, is "pathetic" and will only fuel public cynicism about politics.
 
-In conclusion, parliamentarians debated a national pharmacare program aimed at improving health equity and affordability for Canadians. While there are concerns about the cost and implementation of the program, many agree that it is a historic step towards improving healthcare in Canada.
+In conclusion, the author argues that the bill is unnecessary and creates more problems than it solves, and therefore plans to vote against it.
