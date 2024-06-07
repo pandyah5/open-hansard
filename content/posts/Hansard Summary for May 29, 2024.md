@@ -3,6 +3,7 @@ title = 'Hansard Summary for May 29, 2024'
 date = 2024-05-30T19:09:08-07:00
 draft = false
 +++
+
 **Public Healthcare System Critical for Ensuring Equal Access to Healthcare**
 
 In today's parliament, the importance of public healthcare was highlighted as critical for ensuring equal access to healthcare and preventing a two-tiered system where the private sector targets profitable care and leaves the public system with costly care. Conservatives have criticized the government's actions without proposing concrete solutions, an approach that has been tried before with disastrous results.

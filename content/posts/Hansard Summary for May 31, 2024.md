@@ -3,7 +3,8 @@ title = 'Hansard Summary for May 31, 2024'
 date = 2024-05-31T16:20:18-07:00
 draft = false
 +++
-Title: Parliament Discusses Election Reform and Care Program
+
+**Parliament Discusses Election Reform and Care Program**
 
 The Quebec parliament recently discussed two important topics: receiving care since May 1st and election reform. About 60% of dental care providers in Quebec have signed up for a new program that provides care to patients.
 
